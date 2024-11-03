@@ -194,4 +194,9 @@ kapt {
 repositories {
     mavenCentral()
     jcenter()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'com.github.rongi:rotate-layout:v3.0.0'
 }
