@@ -21,6 +21,14 @@
             type="Bitmap" />
 
         <variable
+            name="artistString"
+            type="String" />
+        
+        <variable
+            name="titleString"
+            type="String" />
+
+        <variable
             name="backgroundResource"
             type="Integer" />
 
