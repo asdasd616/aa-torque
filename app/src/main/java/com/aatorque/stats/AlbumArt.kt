@@ -122,5 +122,13 @@ abstract class AlbumArt : CarFragment() {
         )
     }
 
+    fun metaDataToTitle(medadata: MediaMetadata?): String? {
+        return medadata?.getString(
+            MediaMetadata.METADATA_KEY_TITLE
+        ) ?: medadata?.getString(
+            MediaMetadata.METADATA_KEY_TITLE
+        )
+    }
+
     abstract suspend fun onMediaChanged(medadata: MediaMetadata?)
 }
