@@ -114,5 +114,13 @@ abstract class AlbumArt : CarFragment() {
         )
     }
 
+    fun metaDataToArtist(medadata: MediaMetadata?): String? {
+        return medadata?.getString(
+            MediaMetadata.METADATA_KEY_ARTIST
+        ) ?: medadata?.getString(
+            MediaMetadata.METADATA_KEY_ARTIST
+        )
+    }
+
     abstract suspend fun onMediaChanged(medadata: MediaMetadata?)
 }
