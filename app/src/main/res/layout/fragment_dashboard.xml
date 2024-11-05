@@ -152,7 +152,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/con_status" />
 
             <TextView
-                android:id="@+id/textTitle"
+                android:id="@+id/textSongTitle"
                 android:layout_width="500dp"
                 android:layout_height="0dp"
                 android:ellipsize="marquee"
