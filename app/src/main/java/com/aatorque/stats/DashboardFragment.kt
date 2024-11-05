@@ -376,8 +376,8 @@ open class DashboardFragment : AlbumArt() {
                 displayingArtwork = true
                 return
             }
-            binding.titleString = metaDataToTitle(metadata)
-            binding.artistString = metaDataToArtist(metdata)
+            binding.titleString = metaDataToTitle(medadata)
+            binding.artistString = metaDataToArtist(medadata)
         }
         setupBackground(lastBackground)
     }
