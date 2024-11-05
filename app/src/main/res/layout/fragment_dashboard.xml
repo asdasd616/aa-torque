@@ -142,7 +142,22 @@
                 android:layout_height="0dp"
                 android:ellipsize="marquee"
                 android:maxLines="1"
-                android:text="@{artistString }"
+                android:text="@{artistString}"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:typeface="@{font}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/con_status" />
+
+            <TextView
+                android:id="@+id/textTitle"
+                android:layout_width="500dp"
+                android:layout_height="0dp"
+                android:ellipsize="marquee"
+                android:maxLines="1"
+                android:text="@{titleString}"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textSize="30sp"
