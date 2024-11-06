@@ -173,7 +173,7 @@
                 app:layout_constraintTop_toTopOf="@+id/dial"
                 app:minMax="@{minMax}"
                 app:sv_centerCircleColor="@android:color/transparent"
-                app:sv_indicator="LineIndicator"
+                app:sv_indicator="SpindleIndicator"
                 app:sv_indicatorColor="@color/red"
                 app:sv_markColor="@android:color/transparent"
                 app:sv_speedTextColor="@android:color/transparent"
