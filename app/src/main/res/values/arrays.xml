@@ -25,6 +25,7 @@
         <item>Skoda Monte Carlo</item>
         <item>Aston Martin</item>
         <item>Electro Vehicle</item>
+        <item>Lexus</item>
         <item>Test</item>
     </string-array>
 
@@ -52,6 +53,7 @@
         <item>@drawable/ic_theme_mk</item>
         <item>@drawable/ic_theme_am</item>
         <item>@drawable/ic_theme_ev</item>
+        <item>@drawable/ic_theme_lexus</item>
         <item>@drawable/ic_theme_test</item>
     </array>
 
@@ -79,6 +81,7 @@
         <item>@style/AppTheme.MK</item>
         <item>@style/AppTheme.AM</item>
         <item>@style/AppTheme.EV</item>
+        <item>@style/AppTheme.Lexus</item>
         <item>@style/AppTheme.Testing</item>
     </array>
 

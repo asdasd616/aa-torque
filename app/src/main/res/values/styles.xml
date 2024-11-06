@@ -484,6 +484,19 @@
     </style>
 
 
+    <style name="AppTheme.Lexus" parent="AppTheme">
+        <item name="themedDialBackground">@drawable/dial_background_marks_lexus</item>
+        <item name="themedEmptyDialBackground">@drawable/dial_background_marks_lexus</item>
+        <item name="themedBlankDialBackground">@drawable/dial_background_blank_lexus</item>
+        <item name="themedCarBackground">@drawable/background_incar_vw3</item>
+        <item name="themedNeedle">@drawable/needle_lexus</item>
+        <item name="sv_indicatorColor">@color/aqua</item>
+        <item name="themedStopWatchBackground">@drawable/sw_background_audi</item>
+        <item name="themedNeedleColor">@color/red</item>
+        <item name="sv_tickPadding">20dp</item>
+        <item name="sv_tickRotation">false</item>
+    </style>
+
     <style name="AppTheme.ProgressBar.Horizontal" parent="Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_vertical_material_car</item>
         <item name="android:minWidth">@dimen/progress_bar_height_material_car</item>
