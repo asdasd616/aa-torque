@@ -23,7 +23,7 @@ import com.github.anastr.speedviewlib.Speedometer
 import com.github.anastr.speedviewlib.components.Section
 import com.github.anastr.speedviewlib.components.indicators.Indicator
 import com.github.anastr.speedviewlib.components.indicators.TriangleIndicator
-import com.github.anastr.speedviewlib.components.indicators.LineIndicator
+import com.github.anastr.speedviewlib.components.indicators.SpindleIndicator
 import timber.log.Timber
 import java.util.Locale
 
@@ -82,7 +82,7 @@ class TorqueGauge : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mMax.indicator = LineIndicator(requireContext())
+        mMax.indicator = SpindleIndicator(requireContext())
         mMax.indicator.color = requireContext().theme.obtainStyledAttributes(intArrayOf(R.attr.themedNeedleColor)).getColor(0, Color.RED)
         mMax.clearSections()
         mMax.addSections(
