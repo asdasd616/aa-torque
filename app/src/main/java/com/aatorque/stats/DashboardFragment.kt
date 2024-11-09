@@ -121,6 +121,7 @@ open class DashboardFragment : AlbumArt() {
                 binding.title = screens.title
                 settingsViewModel.chartVisible.value = it.showChart
                 settingsViewModel.minMaxBelow.value = it.minMaxBelow
+                settingsViewModel.showSongInfo.value = it.showSongInfo
                 shouldDisplayArtwork = it.albumArt
 
                 albumArtReady.countDown()
@@ -370,8 +371,11 @@ open class DashboardFragment : AlbumArt() {
         if (!shouldDisplayArtwork) return
         if (medadata != null) {
             binding.backgroundBitmap = metaDataToArt(medadata)
-            binding.titleString = metaDataToTitle(medadata)
-            binding.artistString = metaDataToArtist(medadata)
+            if (settingsViewModel.showSongInfo.value) {
+                binding.titleString = metaDataToTitle(medadata)
+                binding.artistString = metaDataToArtist(medadata)
+            }
+
             if (binding.backgroundBitmap != null) {
                 binding.blurEffect = albumBlurEffect
                 binding.colorFilter = albumColorFilter

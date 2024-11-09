@@ -37,6 +37,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     lateinit var opacityPref: SeekBarPreference
     lateinit var darkenArtPref: SeekBarPreference
     lateinit var blurArtPref: SeekBarPreference
+    lateinit var showSongInfoPref: CheckBoxPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +54,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         opacityPref = findPreference("gaugeOpacity")!!
         blurArtPref = findPreference("blurArtwork")!!
         darkenArtPref = findPreference("darkenArtwork")!!
+        showSongInfoPref = findPreference("showSongInfo")!!
         themePref.summaryProvider = ListPreference.SimpleSummaryProvider.getInstance()
         fontPref.summaryProvider = ListPreference.SimpleSummaryProvider.getInstance()
         backgroundPref.summaryProvider = ListPreference.SimpleSummaryProvider.getInstance()
@@ -120,6 +122,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
         minMaxBelowPref.setOnPreferenceChangeListener { preference, newValue ->
             updateDatastorePref {
                 it.setMinMaxBelow(newValue as Boolean)
+            }
+            return@setOnPreferenceChangeListener true
+        }
+        showSongInfoPref.setOnPreferenceChangeListener { preference, newValue ->
+            updateDatastorePref {
+                it.setShowSongInfo(newValue as Boolean)
             }
             return@setOnPreferenceChangeListener true
         }
