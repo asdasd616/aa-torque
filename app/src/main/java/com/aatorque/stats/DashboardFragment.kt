@@ -69,6 +69,7 @@ open class DashboardFragment : AlbumArt() {
     private var lastBackground: Int = 0
     val albumArtReady = CountDownLatch(2)
     var shouldDisplayArtwork = false
+    var shouldShowInfo = false
     var displayingArtwork = false
     var albumBlurEffect: RenderEffect? = null
         set(value) {
@@ -123,6 +124,7 @@ open class DashboardFragment : AlbumArt() {
                 settingsViewModel.minMaxBelow.value = it.minMaxBelow
                 settingsViewModel.showSongInfo.value = it.showSongInfo
                 shouldDisplayArtwork = it.albumArt
+                shouldShowInfo = it.showSongInfo
 
                 albumArtReady.countDown()
 
@@ -371,7 +373,7 @@ open class DashboardFragment : AlbumArt() {
         if (!shouldDisplayArtwork) return
         if (medadata != null) {
             binding.backgroundBitmap = metaDataToArt(medadata)
-            if (settingsViewModel.showSongInfo.value) {
+            if (shouldShowInfo) {
                 binding.titleString = metaDataToTitle(medadata)
                 binding.artistString = metaDataToArtist(medadata)
             }
