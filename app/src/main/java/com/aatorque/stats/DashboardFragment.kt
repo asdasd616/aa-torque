@@ -377,6 +377,10 @@ open class DashboardFragment : AlbumArt() {
                 binding.titleString = metaDataToTitle(medadata)
                 binding.artistString = metaDataToArtist(medadata)
             }
+            else {
+                binding.titleString = ""
+                binding.artistString = ""
+            }
 
             if (binding.backgroundBitmap != null) {
                 binding.blurEffect = albumBlurEffect
