@@ -79,7 +79,6 @@
             android:summary="@string/media_background_summary"
             android:title="@string/media_background_title" />
         <CheckBoxPreference
-            android:defaultValue="false"
             android:key="showSongInfo"
             android:summary="@string/song_info_desc"
             android:persistent="false"

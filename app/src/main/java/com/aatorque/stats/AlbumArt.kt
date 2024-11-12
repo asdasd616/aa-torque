@@ -89,6 +89,7 @@ abstract class AlbumArt : CarFragment() {
         registed.filterNot { found.contains(it.key) }.forEach {
             it.value()
         }
+
     }
 
     open fun isActive(state: PlaybackState?): Boolean {

@@ -22,6 +22,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.ProgressBar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.InputDeviceCompat
 import androidx.fragment.app.FragmentContainerView
@@ -376,6 +377,7 @@ open class DashboardFragment : AlbumArt() {
             if (shouldShowInfo) {
                 binding.titleString = metaDataToTitle(medadata)
                 binding.artistString = metaDataToArtist(medadata)
+
             }
             else {
                 binding.titleString = ""

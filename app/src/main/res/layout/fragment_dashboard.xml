@@ -71,6 +71,7 @@
         <variable
             name="minMaxBelow"
             type="Boolean" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -138,6 +139,10 @@
 
             <TextView
                 android:id="@+id/textArtist"
+                android:shadowColor="#000000"
+                android:shadowDx="2.0"
+                android:shadowDy="2.0"
+                android:shadowRadius="2.0"
                 android:layout_width="500dp"
                 android:layout_height="0dp"
                 android:ellipsize="marquee"
@@ -153,6 +158,10 @@
 
             <TextView
                 android:id="@+id/textSongTitle"
+                android:shadowColor="#000000"
+                android:shadowDx="2.0"
+                android:shadowDy="2.0"
+                android:shadowRadius="2.0"
                 android:layout_width="500dp"
                 android:layout_height="0dp"
                 android:ellipsize="marquee"
@@ -175,9 +184,9 @@
                 android:background="@android:color/transparent"
                 android:scaleType="centerCrop"
                 android:visibility="@{showBtns ? View.VISIBLE : View.GONE}"
-                app:layout_constraintBottom_toBottomOf="@+id/textTitle"
+                app:layout_constraintBottom_toBottomOf="@+id/textSongTitle"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textTitle"
+                app:layout_constraintTop_toTopOf="@+id/textSongTitle"
                 app:layout_constraintDimensionRatio="1:1"/>
 
             <ImageButton
@@ -189,9 +198,9 @@
                 android:src="@drawable/arrow_back"
                 android:scaleType="centerCrop"
                 android:visibility="@{showBtns ? View.VISIBLE : View.GONE}"
-                app:layout_constraintBottom_toBottomOf="@+id/textTitle"
+                app:layout_constraintBottom_toBottomOf="@+id/textSongTitle"
                 app:layout_constraintEnd_toStartOf="@id/nextBtn"
-                app:layout_constraintTop_toTopOf="@+id/textTitle"
+                app:layout_constraintTop_toTopOf="@+id/textSongTitle"
                 app:layout_constraintDimensionRatio="1:1"/>
 
             <ImageButton
@@ -206,9 +215,9 @@
                 android:src="@drawable/arrow_forward"
                 android:textAlignment="center"
                 android:visibility="@{showBtns ? View.VISIBLE : View.GONE}"
-                app:layout_constraintBottom_toBottomOf="@+id/textTitle"
+                app:layout_constraintBottom_toBottomOf="@+id/textSongTitle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textTitle"
+                app:layout_constraintTop_toTopOf="@+id/textSongTitle"
                 app:layout_constraintDimensionRatio="1:1" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
