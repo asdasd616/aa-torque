@@ -51,12 +51,7 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
 
-      - name: Bump version
-        id: bump_version
-        if: github.repository == 'asdasd616/aa-torque'
-        uses: oflynned/android-version-bump@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
       - uses: rickstaa/action-create-tag@v1
         id: "tag_create"
