@@ -53,7 +53,7 @@ jobs:
 
       - name: Bump version
         id: bump_version
-        if: github.repository == 'asdasd616/aa-torque'
+        if: github.repository == 'argonick/aa-torque'
         uses: oflynned/android-version-bump@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -67,7 +67,7 @@ jobs:
           message: "Latest release"
 
       - name: Build Release apk
-        if: github.repository == 'asdasd616/aa-torque'
+        if: github.repository == 'argonick/aa-torque'
         run: >
           echo "" >> ./local.properties &&
           ./gradlew assembleRelease 
@@ -77,7 +77,7 @@ jobs:
           -Pandroid.injected.signing.key.password=android
 
       - name: Build Release apk for forked repos
-        if: github.repository != 'asdasd616/aa-torque'
+        if: github.repository != 'argonick/aa-torque'
         run: >
            echo "" >> ./local.properties && ./gradlew assembleRelease 
 
