@@ -62,7 +62,7 @@ jobs:
           message: "Latest release"
 
       - name: Build Release apk
-        if: github.repository == 'agronick/aa-torque'
+        if: github.repository == 'asdasd616/aa-torque'
         run: >
           echo "" >> ./local.properties &&
           ./gradlew assembleRelease 
