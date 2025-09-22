@@ -4,11 +4,11 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
         with:
           submodules: recursive
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
           java-version: '19'
@@ -31,11 +31,11 @@ jobs:
       discussions: write
     if: github.ref == 'refs/heads/master'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
         with:
           submodules: recursive
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
           java-version: '19'
@@ -51,7 +51,12 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
 
-
+      - name: Bump version
+        id: bump_version
+        if: github.repository == 'agronick/aa-torque'
+        uses: oflynned/android-version-bump@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: rickstaa/action-create-tag@v1
         id: "tag_create"
@@ -62,7 +67,7 @@ jobs:
           message: "Latest release"
 
       - name: Build Release apk
-        if: github.repository == 'asdasd616/aa-torque'
+        if: github.repository == 'agronick/aa-torque'
         run: >
           echo "" >> ./local.properties &&
           ./gradlew assembleRelease 
