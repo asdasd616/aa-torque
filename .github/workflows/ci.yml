@@ -80,8 +80,8 @@ jobs:
       - name: Create Github Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.bump_version.outputs.new_tag || 'latest' }}
-          name: ${{ steps.bump_version.outputs.new_tag || 'latest' }}
+          tag_name: ${{ steps.bump_version.outputs.new_tag || 'latestest' }}
+          name: ${{ steps.bump_version.outputs.new_tag || 'latestest' }}
           generate_release_notes: true
           draft: true
           files: |
