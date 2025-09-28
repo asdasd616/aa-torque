@@ -51,7 +51,7 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
 
-     - name: Bump version
+      - name: Bump version
         id: bump_version
         if: github.repository == 'agronick/aa-torque'
         uses: oflynned/android-version-bump@master
