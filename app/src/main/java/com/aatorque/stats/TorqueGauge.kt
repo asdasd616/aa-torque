@@ -27,6 +27,7 @@ import com.github.anastr.speedviewlib.components.indicators.SpindleIndicator
 import timber.log.Timber
 import java.util.Locale
 
+
 const val NUM_TICKS = 9
 val MIN_MAX_DEFAULT = Pair(0f, 100f)
 class TorqueGauge : Fragment() {
