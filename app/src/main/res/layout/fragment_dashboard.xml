@@ -27,6 +27,10 @@
         <variable
             name="titleString"
             type="String" />
+        
+        <variable
+            name="progressString"
+            type="String" />
 
         <variable
             name="backgroundResource"
