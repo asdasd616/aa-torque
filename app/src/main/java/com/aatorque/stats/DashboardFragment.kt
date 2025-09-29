@@ -223,6 +223,10 @@ open class DashboardFragment : AlbumArt() {
         }
     }
 
+    override fun onUpdate() {
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
