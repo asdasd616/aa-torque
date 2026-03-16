@@ -40,6 +40,16 @@ jobs:
           distribution: 'zulu'
           java-version: '19'
 
+      - name: Read version from properties
+        id: version
+        run: |
+          MAJOR=$(grep "majorVersion" version.properties | cut -d'=' -f2)
+          MINOR=$(grep "minorVersion" version.properties | cut -d'=' -f2)
+          PATCH=$(grep "patchVersion" version.properties | cut -d'=' -f2)
+          VERSION="${MAJOR}.${MINOR}.${PATCH}"
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "Version: $VERSION"
+
       - name: Restore keystore
         run: echo "${{ secrets.DEBUG_KEYSTORE }}" | base64 -d > $HOME/debug.keystore
 
@@ -50,14 +60,6 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
-
-      - uses: rickstaa/action-create-tag@v1
-        id: "tag_create"
-        with:
-          tag: "latest"
-          tag_exists_error: false
-          force_push_tag: true
-          message: "Latest release"
 
       - name: Build Release apk
         if: github.repository == 'asdasd616/aa-torque'
@@ -77,13 +79,21 @@ jobs:
       - name: Rename release
         run: mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/aa-torque.apk
 
-      - name: Create Github Release
+      - name: Create Github Release with Version Tag
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.bump_version.outputs.new_tag || 'latestest' }}
-          name: ${{ steps.bump_version.outputs.new_tag || 'latestest' }}
+          tag_name: v${{ steps.version.outputs.VERSION }}
+          name: Version ${{ steps.version.outputs.VERSION }}
           generate_release_notes: true
-          draft: true
+          draft: false
           files: |
             app/build/outputs/apk/release/aa-torque.apk
             app/build/outputs/mapping/release/mapping.txt
+
+      - name: Update Latest Tag
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: "latest"
+          tag_exists_error: false
+          force_push_tag: true
+          message: "Latest release"
