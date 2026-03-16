@@ -70,7 +70,7 @@ jobs:
           -Pandroid.injected.signing.key.password=android
 
       - name: Build Release apk for forked repos
-        if: github.repository != 'agronick/aa-torque'
+        if: github.repository != 'asdasd616/aa-torque'
         run: >
            echo "" >> ./local.properties && ./gradlew assembleRelease 
 
