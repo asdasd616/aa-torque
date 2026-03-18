@@ -473,6 +473,7 @@ open class DashboardFragment : AlbumArt() {
             "larabie" -> R.font.larabie
             "ford" -> R.font.unitedsans
             "ev" -> R.font.ev
+            "lexus" -> R.font.eurostar
             else -> R.font.digital
         }
         settingsViewModel.setFont(font)
