@@ -18,7 +18,8 @@ abstract class AlbumArt : CarFragment() {
 
     val registed = HashMap<Int, () -> Unit>()
     private val updateChannel = MutableSharedFlow<MediaMetadata?>()
-    private val playbackStateChannel = MutableSharedFlow<PlaybackState?>()
+    protected val playbackStateChannel = MutableSharedFlow<PlaybackState?>()
+    protected var lastPlaybackState: PlaybackState? = null
 
     override fun onResume() {
         super.onResume()
@@ -38,8 +39,13 @@ abstract class AlbumArt : CarFragment() {
                 }
                 .collect {
                     Timber.i("Sending new metadata ${it}")
-                    onMediaChanged(it)
+                    onMediaChanged(it, lastPlaybackState)
                 }
+        }
+        lifecycleScope.launch {
+            playbackStateChannel.asSharedFlow().collect {
+                lastPlaybackState = it
+            }
         }
         registerMedia()
     }
@@ -72,8 +78,7 @@ abstract class AlbumArt : CarFragment() {
                             updateChannel.emit(metadata)
                         }
                     }
-                    
-                    // ADD THIS: Listen for playback state changes
+
                     override fun onPlaybackStateChanged(state: PlaybackState?) {
                         super.onPlaybackStateChanged(state)
                         lifecycleScope.launch {
@@ -88,6 +93,7 @@ abstract class AlbumArt : CarFragment() {
                 }
                 if (isActive(it.playbackState)) {
                     lifecycleScope.launch {
+                        lastPlaybackState = it.playbackState
                         updateChannel.emit(it.metadata)
                         Timber.i("Sending initial metadata ${it.metadata}")
                     }
@@ -98,7 +104,6 @@ abstract class AlbumArt : CarFragment() {
         registed.filterNot { found.contains(it.key) }.forEach {
             it.value()
         }
-
     }
 
     open fun isActive(state: PlaybackState?): Boolean {
@@ -140,14 +145,13 @@ abstract class AlbumArt : CarFragment() {
         )
     }
 
-    fun getMediaDuration(state: PlaybackState?): Long {
-        return state?.duration ?: 0L
+    fun getMediaDuration(metadata: MediaMetadata?): Long {
+        return metadata?.getLong(MediaMetadata.METADATA_KEY_DURATION) ?: 0L
     }
-    
+
     fun getMediaPosition(state: PlaybackState?): Long {
         return state?.position ?: 0L
     }
 
     abstract suspend fun onMediaChanged(metadata: MediaMetadata?, state: PlaybackState?)
-    //abstract suspend fun onMediaChanged(medadata: MediaMetadata?)
 }
