@@ -12,6 +12,7 @@ import android.graphics.PorterDuffColorFilter
 import android.graphics.RenderEffect
 import android.graphics.Shader
 import android.media.MediaMetadata
+import android.media.session.PlaybackState
 import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
@@ -35,9 +36,11 @@ import com.aatorque.prefs.dataStore
 import com.aatorque.stats.databinding.FragmentDashboardBinding
 import com.aatorque.utils.CountDownLatch
 import com.google.android.apps.auto.sdk.StatusBarController
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import kotlin.math.abs
@@ -72,6 +75,7 @@ open class DashboardFragment : AlbumArt() {
     var shouldDisplayArtwork = false
     var shouldShowInfo = false
     var displayingArtwork = false
+    private var lastMetadata: MediaMetadata? = null
     var albumBlurEffect: RenderEffect? = null
         set(value) {
             if (Build.VERSION.SDK_INT >= 31) {
@@ -343,25 +347,24 @@ open class DashboardFragment : AlbumArt() {
             torqueRefresher.makeExecutors(torqueService)
         }
 
-        // 1. Collect playback state updates (one-time setup for state changes)
+        // Collect playback state updates and continuously update progress
         lifecycleScope.launch {
             playbackStateChannel.collect { state ->
                 if (state != null) {
-                    binding.mediaDuration = state.duration
-                    binding.mediaPosition = state.position
+                    binding.mediaDuration = getMediaDuration(lastMetadata)
+                    binding.mediaPosition = getMediaPosition(state)
                 }
             }
         }
-        
-        // 2. Continuously update progress position during playback
+
+        // Continuously update progress position during playback
         lifecycleScope.launch {
-            while(isActive) {
-                delay(500) // Update every 500ms
-                registed.values.firstOrNull()?.let { _ ->
-                    // Access the media controller to get current position
-                    binding.mediaPosition = getCurrentMediaPosition()
+            while (coroutineContext.isActive) {
+                delay(500)
+                val state = lastPlaybackState
+                if (isActive(state)) {
+                    binding.mediaPosition = getMediaPosition(state)
                 }
-                if (!isActive) break
             }
         }
     }
@@ -390,18 +393,19 @@ open class DashboardFragment : AlbumArt() {
         torqueService.requestQuit(requireContext())
     }
 
-    override suspend fun onMediaChanged(medadata: MediaMetadata?) {
-        Timber.i("Got new metadata $medadata shouldDisplay: $shouldDisplayArtwork")
+    override suspend fun onMediaChanged(metadata: MediaMetadata?, state: PlaybackState?) {
+        Timber.i("Got new metadata $metadata shouldDisplay: $shouldDisplayArtwork")
+        lastMetadata = metadata
         albumArtReady.await()
         if (!shouldDisplayArtwork) return
-        if (medadata != null) {
-            binding.backgroundBitmap = metaDataToArt(medadata)
+        if (metadata != null) {
+            binding.backgroundBitmap = metaDataToArt(metadata)
             if (shouldShowInfo) {
-                binding.titleString = metaDataToTitle(medadata)
-                binding.artistString = metaDataToArtist(medadata)
-
-            }
-            else {
+                binding.titleString = metaDataToTitle(metadata)
+                binding.artistString = metaDataToArtist(metadata)
+                binding.mediaDuration = getMediaDuration(metadata)
+                binding.mediaPosition = getMediaPosition(state)
+            } else {
                 binding.titleString = ""
                 binding.artistString = ""
             }
@@ -412,7 +416,6 @@ open class DashboardFragment : AlbumArt() {
                 displayingArtwork = true
                 return
             }
-            
         }
         setupBackground(lastBackground)
     }
@@ -474,6 +477,4 @@ open class DashboardFragment : AlbumArt() {
         }
         settingsViewModel.setFont(font)
     }
-
-
 }
