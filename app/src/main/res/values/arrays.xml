@@ -102,6 +102,7 @@
 
     <string-array name="fontValues">
         <item>segments</item>
+		<item>lexus</item>
         <item>vw</item>
         <item>vw2</item>
         <item>vw3</item>
