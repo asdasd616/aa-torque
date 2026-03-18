@@ -44,6 +44,7 @@
     <string name="element_tire">Tire</string>
     <string name="font_audi" translatable="false">Audi Virtual Cockpit</string>
     <string name="font_frutiger" translatable="false">Frutiger</string>
+    <string name="font_lexus" translatable="false">Lexus</string>
     <string name="font_larabie" translatable="false">Larabie</string>
     <string name="font_seat" translatable="false">Seat Metastyle</string>
     <string name="font_segments" translatable="false">7 segment display</string>
