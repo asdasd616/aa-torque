@@ -2,8 +2,8 @@ name: ci
 on: [push]
 
 env:
-  JAVA_VERSION: '19'
-  GRADLE_CACHE_KEY: v6
+  JAVA_VERSION: '17'
+  GRADLE_CACHE_KEY: v8
 
 jobs:
   lint:
@@ -17,6 +17,11 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Patch SpeedViewLib to Java 17
+        run: |
+          sed -i 's/VERSION_19/VERSION_17/g' lib/speedviewlib/speedviewlib/build.gradle
+          sed -i 's/jvmTarget.*=.*"19"/jvmTarget = "17"/g' lib/speedviewlib/speedviewlib/build.gradle
 
       - name: Cache Gradle and wrapper
         uses: actions/cache@v4
@@ -46,6 +51,11 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Patch SpeedViewLib to Java 17
+        run: |
+          sed -i 's/VERSION_19/VERSION_17/g' lib/speedviewlib/speedviewlib/build.gradle
+          sed -i 's/jvmTarget.*=.*"19"/jvmTarget = "17"/g' lib/speedviewlib/speedviewlib/build.gradle
 
       - name: Read version from properties
         id: version
