@@ -342,6 +342,28 @@ open class DashboardFragment : AlbumArt() {
         lifecycleScope.launch {
             torqueRefresher.makeExecutors(torqueService)
         }
+
+        // 1. Collect playback state updates (one-time setup for state changes)
+        lifecycleScope.launch {
+            playbackStateChannel.collect { state ->
+                if (state != null) {
+                    binding.mediaDuration = state.duration
+                    binding.mediaPosition = state.position
+                }
+            }
+        }
+        
+        // 2. Continuously update progress position during playback
+        lifecycleScope.launch {
+            while(isActive) {
+                delay(500) // Update every 500ms
+                registed.values.firstOrNull()?.let { _ ->
+                    // Access the media controller to get current position
+                    binding.mediaPosition = getCurrentMediaPosition()
+                }
+                if (!isActive) break
+            }
+        }
     }
 
     override fun onStart() {
