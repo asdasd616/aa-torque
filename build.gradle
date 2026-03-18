@@ -68,6 +68,13 @@ subprojects {
             jvmToolchain(17)
         }
     }
+    afterEvaluate {
+        tasks.matching { it.name.contains("kotlin", true) }.configureEach {
+            if (it.hasProperty("kotlinOptions")) {
+                it.kotlinOptions.jvmTarget = "17"
+            }
+        }
+    }
 }
 
 tasks.register('clean', Delete) {
