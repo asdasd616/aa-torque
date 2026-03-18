@@ -45,4 +45,7 @@
     <color name="graphColor2">#aee93d</color>
     <color name="graphColor3">#e9783d</color>
     <color name="transparentBlack">#88000000</color>
+
+    <color name="mediaProgressTrack">#4C4C4C</color>
+    <color name="mediaProgressFill">@android:color/white</color>
 </resources>
