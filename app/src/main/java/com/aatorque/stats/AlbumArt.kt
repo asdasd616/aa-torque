@@ -18,6 +18,7 @@ abstract class AlbumArt : CarFragment() {
 
     val registed = HashMap<Int, () -> Unit>()
     private val updateChannel = MutableSharedFlow<MediaMetadata?>()
+    private val playbackStateChannel = MutableSharedFlow<PlaybackState?>()
 
     override fun onResume() {
         super.onResume()
@@ -69,6 +70,14 @@ abstract class AlbumArt : CarFragment() {
                         super.onMetadataChanged(metadata)
                         lifecycleScope.launch {
                             updateChannel.emit(metadata)
+                        }
+                    }
+                    
+                    // ADD THIS: Listen for playback state changes
+                    override fun onPlaybackStateChanged(state: PlaybackState?) {
+                        super.onPlaybackStateChanged(state)
+                        lifecycleScope.launch {
+                            playbackStateChannel.emit(state)
                         }
                     }
                 }
@@ -131,5 +140,14 @@ abstract class AlbumArt : CarFragment() {
         )
     }
 
-    abstract suspend fun onMediaChanged(medadata: MediaMetadata?)
+    fun getMediaDuration(state: PlaybackState?): Long {
+        return state?.duration ?: 0L
+    }
+    
+    fun getMediaPosition(state: PlaybackState?): Long {
+        return state?.position ?: 0L
+    }
+
+    abstract suspend fun onMediaChanged(metadata: MediaMetadata?, state: PlaybackState?)
+    //abstract suspend fun onMediaChanged(medadata: MediaMetadata?)
 }
