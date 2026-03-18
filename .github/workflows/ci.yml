@@ -19,7 +19,7 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-v2-${{ hashFiles('**/*.gradle*') }}
+          key: ${{ runner.os }}-gradle-v3-${{ hashFiles('**/*.gradle*') }}
 
       - name: Build Release apk
         run: echo "" >> ./local.properties && ./gradlew clean lintRelease
