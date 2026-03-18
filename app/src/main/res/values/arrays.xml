@@ -87,7 +87,7 @@
 
     <string-array name="fontEntries">
         <item>@string/font_segments</item>
-		<item>@string/font_lexus/item>
+		<item>@string/font_lexus</item>
         <item>@string/font_vw</item>
         <item>@string/font_vw2</item>
         <item>@string/font_vw3</item>
