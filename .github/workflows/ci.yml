@@ -2,8 +2,8 @@ name: ci
 on: [push]
 
 env:
-  JAVA_VERSION: '17'
-  GRADLE_CACHE_KEY: v5  # Bump this to bust cache when needed
+  JAVA_VERSION: '19'
+  GRADLE_CACHE_KEY: v6
 
 jobs:
   lint:
