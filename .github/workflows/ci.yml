@@ -34,7 +34,7 @@ jobs:
             ${{ runner.os }}-gradle-${{ env.GRADLE_CACHE_KEY }}-
 
       - name: Build Release apk
-        run: echo "" >> ./local.properties && ./gradlew clean lintRelease
+        run: echo "" >> ./local.properties && ./gradlew clean lintRelease --stacktrace
 
   build_deploy:
     runs-on: ubuntu-latest
@@ -84,7 +84,7 @@ jobs:
         if: github.repository == 'asdasd616/aa-torque'
         run: >
           echo "" >> ./local.properties &&
-          ./gradlew assembleRelease 
+          ./gradlew assembleRelease --stacktrace
           -Pandroid.injected.signing.store.file=$HOME/debug.keystore 
           -Pandroid.injected.signing.key.alias=androiddebugkey 
           -Pandroid.injected.signing.store.password=android 
@@ -93,7 +93,7 @@ jobs:
       - name: Build Release apk for forked repos
         if: github.repository != 'asdasd616/aa-torque'
         run: >
-          echo "" >> ./local.properties && ./gradlew assembleRelease 
+          echo "" >> ./local.properties && ./gradlew assembleRelease --stacktrace
 
       - name: Rename release
         run: mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/aa-torque.apk
