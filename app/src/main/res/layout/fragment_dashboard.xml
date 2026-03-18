@@ -63,6 +63,10 @@
         <variable
             name="status"
             type="Integer" />
+        
+        <variable
+            name="showSongInfo"
+            type="Boolean" />
 
         <variable
             name="showBtns"
