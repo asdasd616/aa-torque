@@ -69,7 +69,7 @@ subprojects {
         }
     }
     afterEvaluate {
-        tasks.matching { it.name.contains("kotlin", true) }.configureEach {
+        tasks.matching { it.name.toLowerCase().contains("kotlin") }.configureEach {
             if (it.hasProperty("kotlinOptions")) {
                 it.kotlinOptions.jvmTarget = "17"
             }
