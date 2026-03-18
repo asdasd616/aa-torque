@@ -173,7 +173,7 @@
                 android:layout_width="500dp"
                 android:layout_height="4dp"
                 android:layout_marginTop="4dp"
-                android:progress="@{mediaPosition > 0 && mediaDuration > 0 ? (int)(mediaPosition * 100 / mediaDuration) : 0}"
+                android:progress="@{mediaPosition > 0 &amp;&amp; mediaDuration > 0 ? (int)(mediaPosition * 100 / mediaDuration) : 0}"
                 android:visibility="@{showSongInfo ? View.VISIBLE : View.GONE}"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:progressTint="@android:color/white"
