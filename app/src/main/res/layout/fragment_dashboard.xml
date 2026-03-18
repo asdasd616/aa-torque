@@ -29,6 +29,18 @@
             type="String" />
 
         <variable
+            name="mediaProgress"
+            type="Integer" />
+        
+        <variable
+            name="mediaDuration"
+            type="Long" />
+        
+        <variable
+            name="mediaPosition"
+            type="Long" />
+
+        <variable
             name="backgroundResource"
             type="Integer" />
 
@@ -155,6 +167,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textSongTitle" />
+
+            <ProgressBar
+                android:id="@+id/mediaProgressBar"
+                android:layout_width="500dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="4dp"
+                android:progress="@{mediaPosition > 0 && mediaDuration > 0 ? (int)(mediaPosition * 100 / mediaDuration) : 0}"
+                android:visibility="@{showSongInfo ? View.VISIBLE : View.GONE}"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:progressTint="@android:color/white"
+                android:progressBackgroundTint="#4C4C4C"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textArtist" />
 
             <TextView
                 android:id="@+id/textSongTitle"
