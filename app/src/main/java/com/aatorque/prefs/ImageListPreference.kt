@@ -111,7 +111,7 @@ class ImageListPreference(
     override fun notifyChanged() {
         super.notifyChanged()
         val valIndex = entryValues.indexOf(value)
-        if (valIndex == -1) {
+        if (valIndex == -1 || valIndex >= iconResArray.size) {  // Add this check
             lastIconResource = null
             icon = null
         } else {
