@@ -117,6 +117,7 @@
 
     <string-array name="FontThumbs">
         <item>@drawable/ic_font_segments</item>
+    	<item>@drawable/ic_font_lexus</item>
         <item>@drawable/ic_font_vwcarui</item>
         <item>@drawable/ic_font_thesis</item>
         <item>@drawable/ic_font_vwdigit</item>
